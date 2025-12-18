@@ -13,24 +13,26 @@ function Login() {
   setError('');
 
   try {
-    const response = await axios.post('https://newsflow-backend-jlfd.onrender.com/api/auth/login', {
-      email,
-      password
-    });
+    const response = await axios.post(
+      'https://newsflow-backend-jlfd.onrender.com/api/auth/login',
+      { email, password }
+    );
 
-    console.log('Login response:', response.data); // ADD THIS
-    
+    console.log('Login response:', response.data);
+
     localStorage.setItem('token', response.data.token);
     localStorage.setItem('userId', response.data.userId);
-    
-    console.log('Token stored:', localStorage.getItem('token')); // ADD THIS
-    
-    navigate('/preferences', { replace: true });
+
+    // Trigger a storage event so App.jsx updates isAuthenticated
+    window.dispatchEvent(new Event('storage'));
+
+    navigate('/preferences', { replace: true }); // SPA navigation
   } catch (err) {
-    console.error('Login error:', err); // ADD THIS
+    console.error('Login error:', err);
     setError(err.response?.data?.message || 'Login failed');
   }
 };
+
   return (
     <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px' }}>
       <h2>Login to NewsFlow</h2>
