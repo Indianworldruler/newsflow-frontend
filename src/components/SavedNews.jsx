@@ -38,9 +38,11 @@ function SavedNews() {
   };
 
   const logout = () => {
-  localStorage.clear(); // or remove specific keys
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
   navigate('/login', { replace: true });
 };
+
 
   if (loading) return <p>Loading saved articles...</p>;
 
