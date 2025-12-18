@@ -14,7 +14,7 @@ function SavedNews() {
   const fetchSavedArticles = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('https://newsflow-backend-jlfd.onrender.com//api/saved', {
+      const response = await axios.get('https://newsflow-backend-jlfd.onrender.com/api/saved', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSavedArticles(response.data);
@@ -27,7 +27,7 @@ function SavedNews() {
   const deleteArticle = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://newsflow-backend-jlfd.onrender.com//api/saved/${id}`, {
+      await axios.delete(`https://newsflow-backend-jlfd.onrender.com/api/saved/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSavedArticles(savedArticles.filter(article => article._id !== id));
