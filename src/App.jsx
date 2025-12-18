@@ -9,38 +9,72 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const checkAuth = () => {
+  useEffect(() => {
     const token = localStorage.getItem('token');
     setIsAuthenticated(!!token);
     setLoading(false);
+  }, []);
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
   };
 
-  useEffect(() => {
-    checkAuth();
-    
-    // Listen for storage changes (when login/signup happens)
-    window.addEventListener('storage', checkAuth);
-    return () => window.removeEventListener('storage', checkAuth);
-  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    setIsAuthenticated(false);
+  };
 
   const ProtectedRoute = ({ children }) => {
     if (loading) return <div>Loading...</div>;
-    return isAuthenticated ? children : <Navigate to="/login" />;
+    return isAuthenticated ? children : <Navigate to="/login" replace />;
   };
 
   const PublicRoute = ({ children }) => {
     if (loading) return <div>Loading...</div>;
-    return !isAuthenticated ? children : <Navigate to="/preferences" />;
+    return !isAuthenticated ? children : <Navigate to="/preferences" replace />;
   };
 
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-        <Route path="/signin" element={<PublicRoute><Signin /></PublicRoute>} />
-        <Route path="/preferences" element={<ProtectedRoute><Preferences /></ProtectedRoute>} />
-        <Route path="/saved" element={<ProtectedRoute><SavedNews /></ProtectedRoute>} />
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login onLogin={handleLogin} />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/signin"
+          element={
+            <PublicRoute>
+              <Signin onLogin={handleLogin} />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/preferences"
+          element={
+            <ProtectedRoute>
+              <Preferences onLogout={handleLogout} />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/saved"
+          element={
+            <ProtectedRoute>
+              <SavedNews onLogout={handleLogout} />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
   );
