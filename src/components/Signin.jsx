@@ -19,7 +19,7 @@ function Signin() {
   }
 
   try {
-    const response = await axios.post('https://newsflow-backend-jlfd.onrender.com//api/auth/signup', {
+    const response = await axios.post('https://newsflow-backend-jlfd.onrender.com/api/auth/signup', {
       email,
       password
     });
