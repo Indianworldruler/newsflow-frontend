@@ -168,14 +168,23 @@ function Preferences({ onLogout }) {
                 style={{ width: '100%', height: '200px', objectFit: 'cover' }}
               />
             )}
-            <div style={{ padding: '15px' }}>
-              <h4>{article.title}</h4>
-              <p>{article.description}</p>
-              <a href={article.url} target="_blank" rel="noopener noreferrer">
-                Read More
-              </a>
-              <button onClick={() => saveArticle(article)}>Save</button>
-            </div>
+            <div style={{ marginTop: '10px' }}>
+  <a
+    href={article.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ marginRight: '10px' }}
+  >
+    Read More
+  </a>
+  <button
+    onClick={() => saveArticle(article)}
+    style={{ padding: '5px 10px', cursor: 'pointer' }}
+  >
+    Save
+  </button>
+</div>
+
           </div>
         ))}
       </div>
