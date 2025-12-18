@@ -27,7 +27,7 @@ function Signin() {
     localStorage.setItem('token', response.data.token);
     localStorage.setItem('userId', response.data.userId);
     
-    window.location.href = '/preferences';
+    navigate('/preferences');
   } catch (err) {
     setError(err.response?.data?.message || 'Signup failed');
   }
