@@ -25,7 +25,7 @@ function Login() {
     
     console.log('Token stored:', localStorage.getItem('token')); // ADD THIS
     
-    window.location.href = '/preferences';
+    navigate('/preferences');
   } catch (err) {
     console.error('Login error:', err); // ADD THIS
     setError(err.response?.data?.message || 'Login failed');
