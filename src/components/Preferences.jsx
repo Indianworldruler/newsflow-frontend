@@ -17,7 +17,7 @@ function Preferences() {
   const fetchUserPreferences = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('https://newsflow-backend-jlfd.onrender.com//api/user/preferences', {
+      const response = await axios.get('https://newsflow-backend-jlfd.onrender.com/api/user/preferences', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setPreferences(response.data.preferences);
@@ -38,7 +38,7 @@ function Preferences() {
   const savePreferences = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put('https://newsflow-backend-jlfd.onrender.com//api/user/preferences',
+      await axios.put('https://newsflow-backend-jlfd.onrender.com/api/user/preferences',
         { preferences },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -53,7 +53,7 @@ function Preferences() {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('https://newsflow-backend-jlfd.onrender.com//api/news/personalized', {
+      const response = await axios.get('https://newsflow-backend-jlfd.onrender.com/api/news/personalized', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNews(response.data);
@@ -66,7 +66,7 @@ function Preferences() {
   const saveArticle = async (article) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post('https://newsflow-backend-jlfd.onrender.com//api/saved/save',
+      await axios.post('https://newsflow-backend-jlfd.onrender.com/api/saved/save',
         {
           title: article.title,
           description: article.description,
