@@ -38,10 +38,10 @@ function SavedNews() {
   };
 
   const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
-  navigate('/login'); // Forces full page reload
+  localStorage.clear(); // or remove specific keys
+  navigate('/login', { replace: true });
 };
+
   if (loading) return <p>Loading saved articles...</p>;
 
   return (
