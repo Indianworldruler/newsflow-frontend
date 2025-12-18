@@ -84,10 +84,10 @@ function Preferences() {
   };
 
   const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
-  navigate('/login'); // Forces full page reload
+  localStorage.clear(); // or remove specific keys
+  navigate('/login', { replace: true });
 };
+
 
   return (
     <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
