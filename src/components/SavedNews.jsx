@@ -40,7 +40,7 @@ function SavedNews() {
   const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('userId');
-  window.location.href = '/login'; // Forces full page reload
+  navigate('/login'); // Forces full page reload
 };
   if (loading) return <p>Loading saved articles...</p>;
 
