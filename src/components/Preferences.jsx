@@ -84,9 +84,11 @@ function Preferences() {
   };
 
   const logout = () => {
-  localStorage.clear(); // or remove specific keys
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
   navigate('/login', { replace: true });
 };
+
 
 
   return (
